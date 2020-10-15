@@ -2,7 +2,7 @@
 % Please edit documentation in R/ris_writer.R
 \name{ris_writer}
 \alias{ris_writer}
-\title{ris writer}
+\title{ris writer (Research Information Systems)}
 \usage{
 ris_writer(z)
 }
@@ -13,7 +13,7 @@ ris_writer(z)
 text if one RIS citation or list of many
 }
 \description{
-ris writer
+ris writer (Research Information Systems)
 }
 \examples{
 # from a RIS file
@@ -49,30 +49,35 @@ prj <- ris_reader(z)
 c(cr, prj)
 
 # many bibtex to ris via c method
+if (requireNamespace("bibtex", quietly=TRUE)) {
 a <- system.file('extdata/bibtex.bib', package = "handlr")
 b <- system.file('extdata/crossref.bib', package = "handlr")
 aa <- bibtex_reader(a)
 bb <- bibtex_reader(a)
 (res <- c(aa, bb))
-cat(ris_writer(res), sep = "\\n\\n")
+cat(ris_writer(res), sep = "\n\n")
+}
 
 ## manhy Citeproc to RIS
 z <- system.file('extdata/citeproc-many.json', package = "handlr")
 w <- citeproc_reader(x = z)
 ris_writer(w)
-cat(ris_writer(w), sep = "\\n")
+cat(ris_writer(w), sep = "\n")
 }
 \references{
 RIS tags https://en.wikipedia.org/wiki/RIS_(file_format)
 }
 \seealso{
-Other writers: \code{\link{bibtex_writer}},
-  \code{\link{citeproc_writer}},
-  \code{\link{codemeta_writer}},
-  \code{\link{rdf_xml_writer}},
-  \code{\link{schema_org_writer}}
+Other writers: 
+\code{\link{bibtex_writer}()},
+\code{\link{cff_writer}()},
+\code{\link{citeproc_writer}()},
+\code{\link{codemeta_writer}()},
+\code{\link{rdf_xml_writer}()},
+\code{\link{schema_org_writer}()}
 
-Other ris: \code{\link{ris_reader}}
+Other ris: 
+\code{\link{ris_reader}()}
 }
 \concept{ris}
 \concept{writers}

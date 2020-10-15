@@ -10,12 +10,12 @@ schema_org_writer(z, auto_unbox = TRUE, pretty = TRUE, ...)
 \item{z}{an object of class \code{handl}; see \link{handl} for more}
 
 \item{auto_unbox}{(logical) automatically "unbox" all atomic
-vectors of length 1 (default: \code{TRUE}). passed to \code{\link[jsonlite:toJSON]{jsonlite::toJSON()}}}
+vectors of length 1 (default: \code{TRUE}). passed to \code{\link[jsonlite:fromJSON]{jsonlite::toJSON()}}}
 
 \item{pretty}{(logical) adds indentation whitespace to JSON output
-(default: \code{TRUE}), passed to \code{\link[jsonlite:toJSON]{jsonlite::toJSON()}}}
+(default: \code{TRUE}), passed to \code{\link[jsonlite:fromJSON]{jsonlite::toJSON()}}}
 
-\item{...}{further params passed to \code{\link[jsonlite:toJSON]{jsonlite::toJSON()}}}
+\item{...}{further params passed to \code{\link[jsonlite:fromJSON]{jsonlite::toJSON()}}}
 }
 \value{
 an object of class \code{json}
@@ -24,10 +24,12 @@ an object of class \code{json}
 Schema org writer
 }
 \examples{
+if (requireNamespace("bibtex", quietly=TRUE)) {
 (z <- system.file('extdata/bibtex.bib', package = "handlr"))
 (tmp <- bibtex_reader(z))
 schema_org_writer(tmp)
 schema_org_writer(tmp, pretty = FALSE)
+}
 
 # many citeproc to schema 
 z <- system.file('extdata/citeproc-many.json', package = "handlr")
@@ -36,10 +38,13 @@ schema_org_writer(w)
 schema_org_writer(w, pretty = FALSE)
 }
 \seealso{
-Other writers: \code{\link{bibtex_writer}},
-  \code{\link{citeproc_writer}},
-  \code{\link{codemeta_writer}},
-  \code{\link{rdf_xml_writer}}, \code{\link{ris_writer}}
+Other writers: 
+\code{\link{bibtex_writer}()},
+\code{\link{cff_writer}()},
+\code{\link{citeproc_writer}()},
+\code{\link{codemeta_writer}()},
+\code{\link{rdf_xml_writer}()},
+\code{\link{ris_writer}()}
 }
 \concept{schema_org}
 \concept{writers}

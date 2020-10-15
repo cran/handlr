@@ -5,7 +5,9 @@
 #' @return an object of class `handl`; see [handl] for more
 #' @family readers
 #' @family bibtex
+#' @note requires package `bibtex`, an optional package for handlr
 #' @examples
+#' if (requireNamespace("bibtex", quietly=TRUE)) {
 #' (z <- system.file('extdata/crossref.bib', package = "handlr"))
 #' bibtex_reader(x = z)
 #' (z <- system.file('extdata/bibtex.bib', package = "handlr"))
@@ -14,13 +16,16 @@
 #' # many at once 
 #' (z <- system.file('extdata/bib-many.bib', package = "handlr"))
 #' bibtex_reader(x = z)
+#' }
 bibtex_reader <- function(x) {
+  check_for_package("bibtex")
   assert(x, "character")
   x <- paste0(x, collapse = "\n")
   file <- tempfile(fileext = ".bib")
   if (!is_file(x)) cat(x, sep = "\n", file = file)
   if (is_file(x)) file <- x
-  meta <- unclass(RefManageR::ReadBib(file))
+  # meta <- unclass(RefManageR::ReadBib(file))
+  meta <- unclass(bibtex::read.bib(file=file))
   tmp <- lapply(meta, bibtex_read_one)
   many <- length(meta) > 1
   structure(if (many) tmp else tmp[[1]], 

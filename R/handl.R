@@ -20,7 +20,7 @@
 #' 
 #' The `handl` object follows <https://github.com/datacite/bolognese>, which
 #' uses the Crosscite format as its internal representation. Note that we 
-#' don't currently supporting writing to or reading from Crosscite.
+#' don't currently support writing to or reading from Crosscite.
 #'
 #' Details on each entry are stored in the named attributes:
 #'
@@ -65,6 +65,9 @@
 #' - description: (string) description of the work, often an abstract
 #' - license: (string) license of the work, a named list
 #' - state: (string) the state of the list
+#' - software_version: (string) software version
+#' 
+#' Citeproc formats may have extra fields that begin with `csl_`
 NULL
 
 #' @export

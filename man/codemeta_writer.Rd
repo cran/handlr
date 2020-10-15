@@ -10,12 +10,12 @@ codemeta_writer(z, auto_unbox = TRUE, pretty = TRUE, ...)
 \item{z}{an object of class \code{handl}; see \link{handl} for more}
 
 \item{auto_unbox}{(logical) automatically "unbox" all atomic
-vectors of length 1 (default: \code{TRUE}). passed to \code{\link[jsonlite:toJSON]{jsonlite::toJSON()}}}
+vectors of length 1 (default: \code{TRUE}). passed to \code{\link[jsonlite:fromJSON]{jsonlite::toJSON()}}}
 
 \item{pretty}{(logical) adds indentation whitespace to JSON output
-(default: \code{TRUE}), passed to \code{\link[jsonlite:toJSON]{jsonlite::toJSON()}}}
+(default: \code{TRUE}), passed to \code{\link[jsonlite:fromJSON]{jsonlite::toJSON()}}}
 
-\item{...}{further params passed to \code{\link[jsonlite:toJSON]{jsonlite::toJSON()}}}
+\item{...}{further params passed to \code{\link[jsonlite:fromJSON]{jsonlite::toJSON()}}}
 }
 \value{
 an object of class \code{json}
@@ -24,9 +24,11 @@ an object of class \code{json}
 codemeta writer
 }
 \examples{
+if (requireNamespace("bibtex", quietly=TRUE)) {
 (x <- system.file('extdata/crossref.bib', package = "handlr"))
 (z <- bibtex_reader(x))
 codemeta_writer(z)
+}
 
 # many citeproc to schema 
 z <- system.file('extdata/citeproc-many.json', package = "handlr")
@@ -35,12 +37,16 @@ codemeta_writer(w)
 codemeta_writer(w, pretty = FALSE)
 }
 \seealso{
-Other writers: \code{\link{bibtex_writer}},
-  \code{\link{citeproc_writer}},
-  \code{\link{rdf_xml_writer}}, \code{\link{ris_writer}},
-  \code{\link{schema_org_writer}}
+Other writers: 
+\code{\link{bibtex_writer}()},
+\code{\link{cff_writer}()},
+\code{\link{citeproc_writer}()},
+\code{\link{rdf_xml_writer}()},
+\code{\link{ris_writer}()},
+\code{\link{schema_org_writer}()}
 
-Other codemeta: \code{\link{codemeta_reader}}
+Other codemeta: 
+\code{\link{codemeta_reader}()}
 }
 \concept{codemeta}
 \concept{writers}

@@ -11,10 +11,12 @@
 #' @family writers
 #' @family schema_org
 #' @examples
+#' if (requireNamespace("bibtex", quietly=TRUE)) {
 #' (z <- system.file('extdata/bibtex.bib', package = "handlr"))
 #' (tmp <- bibtex_reader(z))
 #' schema_org_writer(tmp)
 #' schema_org_writer(tmp, pretty = FALSE)
+#' }
 #' 
 #' # many citeproc to schema 
 #' z <- system.file('extdata/citeproc-many.json', package = "handlr")
@@ -43,7 +45,7 @@ schema_hsh <- function(x) {
     "description" = 
       parse_attributes(x$description, content = "text", first = TRUE),
     "license" = unlist(ccp(lapply(x$license, function(l) l$id))),
-    "version" = x$b_version,
+    "version" = x$software_version,
     "keywords" = if (!is.null(x$keywords)) 
       paste0(lapply(x$keywords, function(k) 
         parse_attributes(k, content = "text", first = TRUE)), 

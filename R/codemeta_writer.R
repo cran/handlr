@@ -11,9 +11,11 @@
 #' @family writers
 #' @family codemeta
 #' @examples
+#' if (requireNamespace("bibtex", quietly=TRUE)) {
 #' (x <- system.file('extdata/crossref.bib', package = "handlr"))
 #' (z <- bibtex_reader(x))
 #' codemeta_writer(z)
+#' }
 #' 
 #' # many citeproc to schema 
 #' z <- system.file('extdata/citeproc-many.json', package = "handlr")
@@ -42,7 +44,7 @@ codemeta_write_one <- function(z) {
     "agents" = z$author,
     "description" = parse_attributes(z$description, 
       content = "text", first = TRUE),
-    "version" = z$b_version,
+    "version" = z$software_version,
     # FIXME: not sure what's going on here
     "tags" = if (!is.null(z$keywords)) unlist(z$keywords) else NULL,
     "dateCreated" = z$date_created,

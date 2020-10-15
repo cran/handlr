@@ -6,8 +6,9 @@
 #' 
 #' - citeproc
 #' - ris
-#' - bibtex
-#' - codemeta 
+#' - bibtex (requires suggested package `bibtex`)
+#' - codemeta
+#' - cff
 #' 
 #' @section supported writers:
 #' 
@@ -17,6 +18,7 @@
 #' - schema.org
 #' - rdfxml (requires suggested package `jsonld`)
 #' - codemeta
+#' - cff
 #' 
 #' @section links for citation formats:
 #' 
@@ -26,10 +28,10 @@
 #' - bibtex: <http://www.bibtex.org/>
 #' - schema.org: <https://schema.org/>
 #' - rdfxml: <https://en.wikipedia.org/wiki/RDF/XML>
+#' - cff: <https://citation-file-format.github.io/>
 #'
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom xml2 read_xml
-#' @importFrom RefManageR ReadBib
 #' @importFrom urltools url_encode url_parse
 #' @importFrom crul HttpClient
 #' @importFrom mime guess_type

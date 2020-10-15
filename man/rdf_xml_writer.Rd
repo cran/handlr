@@ -9,7 +9,7 @@ rdf_xml_writer(z, ...)
 \arguments{
 \item{z}{an object of class \code{handl}; see \link{handl} for more}
 
-\item{...}{further params passed to \code{\link[jsonld:jsonld_to_rdf]{jsonld::jsonld_to_rdf()}}}
+\item{...}{further params passed to \code{\link[jsonld:jsonld]{jsonld::jsonld_to_rdf()}}}
 }
 \value{
 RDF XML
@@ -21,22 +21,27 @@ RDF XML writer
 package \code{jsonld} required for this writer
 }
 \examples{
-if (requireNamespace("jsonld") && interactive()) {
+if (require("jsonld") && interactive()) {
   library("jsonld")
   z <- system.file('extdata/citeproc.json', package = "handlr")
   (tmp <- citeproc_reader(z))
-
+ 
+  if (requireNamespace("bibtex", quietly=TRUE)) {
   (z <- system.file('extdata/bibtex.bib', package = "handlr"))
   (tmp <- bibtex_reader(z))
   rdf_xml_writer(z = tmp)
   cat(rdf_xml_writer(z = tmp))
+  }
 }
 }
 \seealso{
-Other writers: \code{\link{bibtex_writer}},
-  \code{\link{citeproc_writer}},
-  \code{\link{codemeta_writer}}, \code{\link{ris_writer}},
-  \code{\link{schema_org_writer}}
+Other writers: 
+\code{\link{bibtex_writer}()},
+\code{\link{cff_writer}()},
+\code{\link{citeproc_writer}()},
+\code{\link{codemeta_writer}()},
+\code{\link{ris_writer}()},
+\code{\link{schema_org_writer}()}
 }
 \concept{rdf-xml}
 \concept{writers}
