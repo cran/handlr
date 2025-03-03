@@ -6,8 +6,8 @@ doi_resolver <- "https://doi.org"
 # validate_doi: should extract DOI if it's in a URL
 # validate_doi(doi = "10.1371/journal.pone.0025995") # valid
 # validate_doi(doi = "10/journal.pone.0025995") # invalid
-# validate_doi(doi = "http://dx.doi.org/10.5063/F1M61H5X") # valid url
-# validate_doi(doi = "http://dx.doi.org/30.5063/F1M61H5X") # invalid url
+# validate_doi(doi = "https://doi.org/10.5063/F1M61H5X") # valid url
+# validate_doi(doi = "https://doi.org/30.5063/F1M61H5X") # invalid url
 validate_doi <- function(doi) {
   # doi <- grep(doi_pattern, doi, perl = TRUE, value = TRUE)
   doi <- regmatches(doi, regexpr(doi_pattern, doi, perl=TRUE))
@@ -36,11 +36,11 @@ validate_prefix <- function(doi) {
 normalize_doi <- function(doi) {
   doi_str <- validate_doi(doi)
   if (is.null(doi_str)) return(NULL)
-  file.path(doi_resolver, urltools::url_encode(doi_str))
+  file.path(doi_resolver, doi_str)
 }
 
-# is_url_doi("http://doi.org/10.1371/journal.pone.0025995")
-# doi_from_url(url = "http://doi.org/10.1371/journal.pone.0025995")
+# is_url_doi("https://doi.org/10.1371/journal.pone.0025995")
+# doi_from_url(url = "https://doi.org/10.1371/journal.pone.0025995")
 doi_from_url <- function(url) {
   if (is_url_doi(url)) {
     df <- urltools::url_parse(url)
@@ -49,7 +49,7 @@ doi_from_url <- function(url) {
 }
 
 # doi_as_url("10.1371/journal.pone.0025995")
-doi_as_url <- function(doi) {  
+doi_as_url <- function(doi) {
   if (!is.null(doi)) file.path(doi_resolver, doi) else NULL
 }
 
@@ -77,10 +77,11 @@ normalize_id <- function(id = NULL) {
     return(NULL)
   }
 
+  return(id)
   # clean up URL
   # FIXME - clean the url
-  res <- tryCatch(urltools::url_encode(id), error = function(e) e)
-  if (inherits(res, "error")) stop("invalid URL") else res
+  # res <- tryCatch(urltools::url_encode(id), error = function(e) e)
+  # if (inherits(res, "error")) stop("invalid URL") else res
   # PostRank::URI.clean(id)
   #   rescue Addressable::URI::InvalidURIError
 }
